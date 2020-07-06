@@ -61,4 +61,3 @@ logging:
     com.priv.mia: trace
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss
-
