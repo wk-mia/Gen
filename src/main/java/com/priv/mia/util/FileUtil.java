@@ -1,6 +1,6 @@
 package com.priv.mia.util;
 
-import com.priv.mia.Generate.GenByTemplate;
+import com.priv.mia.generate.GenByTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

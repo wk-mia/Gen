@@ -1,4 +1,4 @@
-package com.priv.mia.util;
+package com.priv.mia.domain;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -9,13 +9,15 @@ import java.util.HashMap;
 @Component
 @ConfigurationProperties(prefix = "domain")
 @PropertySource(value = "classpath:templateConfig.properties")
-public class TemplateConfig {
+public class TemplateProperties {
 
     private String destPath;
 
     private String templateDirectory;
 
     private String reNameRule;
+
+    private String toCaseRule;
 
     private HashMap<String,Object> tagMap;
 
@@ -52,4 +54,11 @@ public class TemplateConfig {
         this.tagMap = tagMap;
     }
 
+    public String getToCaseRule() {
+        return toCaseRule;
+    }
+
+    public void setToCaseRule(String toCaseRule) {
+        this.toCaseRule = toCaseRule;
+    }
 }

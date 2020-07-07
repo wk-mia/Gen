@@ -1,7 +1,7 @@
-package com.priv.mia.Generate;
+package com.priv.mia.generate;
 
 import com.priv.mia.util.FileUtil;
-import com.priv.mia.util.TemplateConfig;
+import com.priv.mia.domain.TemplateProperties;
 import com.priv.mia.util.TemplateUtil;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -14,31 +14,32 @@ import org.springframework.util.ResourceUtils;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.StringWriter;
+import java.util.HashMap;
 
 @Component
 public class GenByTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(GenByTemplate.class);
 
-    private static TemplateConfig myTemplateConfig;
+    private static TemplateProperties myTemplateProperties;
 
     @Autowired
-    private TemplateConfig templateConfig;
+    private TemplateProperties templateProperties;
 
     @PostConstruct
     private void init() {
-        myTemplateConfig = templateConfig;
+        myTemplateProperties = templateProperties;
     }
 
 
     public static void generate() throws Exception{
 
-        TemplateUtil.initial(myTemplateConfig);
+        TemplateUtil.initial(myTemplateProperties);
         logger.info("Start generating files...");
 
         // 获取配置文件中模板文件所在目录
         String dirPath = ResourceUtils.getURL("classpath:").getPath()
-                .concat(myTemplateConfig.getTemplateDirectory());
+                .concat(myTemplateProperties.getTemplateDirectory());
         File directory = new File(FileUtil.getDir(dirPath));
 
         File[] files = directory.listFiles();
@@ -49,11 +50,11 @@ public class GenByTemplate {
             String sqlmapResult = GenByTemplate.convertTemplate(templateData);
             // 写入文件
             String rootPath = new File("").getCanonicalPath();
-            String outFilePath = rootPath.concat(myTemplateConfig.getDestPath());
+            String outFilePath = rootPath.concat(myTemplateProperties.getDestPath());
             File resultOutDirectory = new File(outFilePath);
             FileUtil.makeDir(resultOutDirectory);
 
-            String outFileName = outFilePath.concat(TemplateUtil.getNewName(file.getName(),myTemplateConfig.getReNameRule()));
+            String outFileName = outFilePath.concat(TemplateUtil.getNewName(file.getName(), myTemplateProperties.getReNameRule()));
             File resultOutFile = new File(outFileName);
             FileUtil.createNewFile(resultOutFile);
 
@@ -63,8 +64,15 @@ public class GenByTemplate {
         logger.info("Mission completed...");
     }
 
-    private static String convertTemplate(String SourceData){
-        VelocityContext context = new VelocityContext(myTemplateConfig.getTagMap());
+    private static String convertTemplate(String SourceData)throws Exception{
+        // 增加未定义的标签
+        HashMap<String,Object> appendProperties = TemplateUtil.appendProperties(SourceData, myTemplateProperties.getTagMap());
+        if(appendProperties != null && appendProperties.size() > 0) {
+            myTemplateProperties.getTagMap().putAll(appendProperties);
+        }
+
+        VelocityContext context = new VelocityContext(myTemplateProperties.getTagMap());
+
         StringWriter writer = new StringWriter();
         Velocity.evaluate(context, writer, "code_gen", SourceData);
         return writer.getBuffer().toString();

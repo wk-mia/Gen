@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
  * @create ${createDate}
  */
 @Service
-public class ${domainNameUpper}ServiceImp implements ${domainNameUpper}Service{
+public class ${domainNameBeginUpper}ServiceImp implements ${domainNameBeginUpper}Service{
 
     @Autowired
-    private ${domainNameUpper}Dao ${domainNameLower}Dao;
+    private ${domainNameBeginUpper}Dao ${domainNameBeginLower}Dao;
+
+        ${domainNameBeginUpper}-${domainNameAllUpper}-${domainNameBeginLower}-${domainNameAllLower}
 
 
 

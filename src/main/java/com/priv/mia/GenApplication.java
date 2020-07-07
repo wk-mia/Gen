@@ -1,6 +1,6 @@
 package com.priv.mia;
 
-import com.priv.mia.Generate.GenByTemplate;
+import com.priv.mia.generate.GenByTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

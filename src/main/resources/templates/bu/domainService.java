@@ -8,7 +8,7 @@ import ${nameSpace}.domain.${domainName};
  * @auther ${author}
  * @create ${createDate}
  */
-public interface ${domainNameUpper}Service {
+public interface ${domainNameBeginUpper}Service {
 
 
 }
