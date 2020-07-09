@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
+/**
+ * 标签及属性配置类
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
+ */
 @Component
 @ConfigurationProperties(prefix = "domain")
 @PropertySource(value = "classpath:templateConfig.properties")

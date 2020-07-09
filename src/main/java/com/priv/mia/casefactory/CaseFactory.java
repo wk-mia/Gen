@@ -1,24 +1,32 @@
 package com.priv.mia.casefactory;
 
+/**
+ * CaseFactory
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
+ */
 public class CaseFactory {
 
-    protected static final String beginUpperCase = "BeginUpper";
+    private CaseFactory(){}
 
-    protected static final String allUpperCase = "AllUpper";
+    protected static final String BEGIN_UPPER_CASE = "BeginUpper";
 
-    protected static final String beginLowerCase = "BeginLower";
+    protected static final String ALL_UPPER_CASE = "AllUpper";
 
-    protected static final String allLowerCase = "AllLower";
+    protected static final String BEGIN_LOWER_CASE = "BeginLower";
 
-    public static ICase createCase(String toCase){
+    protected static final String ALL_LOWER_CASE = "AllLower";
+
+    public static AbstractCase createCase(String toCase){
         switch (toCase){
-            case beginUpperCase:
+            case BEGIN_UPPER_CASE:
                 return new BeginUpperCase();
-            case allUpperCase:
+            case ALL_UPPER_CASE:
                 return new AllUpperCase();
-            case beginLowerCase:
+            case BEGIN_LOWER_CASE:
                 return new BeginLowerCase();
-            case allLowerCase:
+            case ALL_LOWER_CASE:
                 return new AllLowerCase();
             default:
                 return null;

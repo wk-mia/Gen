@@ -5,20 +5,24 @@ import com.priv.mia.util.CaseUtil;
 import java.util.HashMap;
 import java.util.HashSet;
 
+
 /**
  * 全字母大写
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
  */
-public class AllUpperCase extends ICase {
+public class AllUpperCase extends AbstractCase {
 
     @Override
     public HashMap<String, Object> getToCaseMap(String dataSource,HashMap<String,Object> alreadyMap) {
 
-        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.allUpperCase);
+        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.ALL_UPPER_CASE);
         // 追加的标签
-        HashMap<String,Object> appenedTagMap = new HashMap<>();
+        HashMap<String,Object> appenedTagMap = new HashMap<>(16);
         if(appenedTagKeys.size() > 0){
             appenedTagKeys.forEach(item -> {
-                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.allUpperCase);
+                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.ALL_UPPER_CASE);
                 appenedTagMap.put(item, transformAppenedTagValue(alreadyTagValue));
             });
             return appenedTagMap;

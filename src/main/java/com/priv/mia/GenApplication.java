@@ -4,7 +4,10 @@ import com.priv.mia.generate.GenByTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+/**
+ * @author : wuyz
+ * @date : 2020/07/09
+ */
 @SpringBootApplication
 public class GenApplication {
 

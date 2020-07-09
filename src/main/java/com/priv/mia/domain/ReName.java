@@ -2,6 +2,12 @@ package com.priv.mia.domain;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * 覆盖输出文件名称类
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
+ */
 @Component
 public class ReName {
 

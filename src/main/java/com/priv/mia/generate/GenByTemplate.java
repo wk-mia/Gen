@@ -16,6 +16,12 @@ import java.io.File;
 import java.io.StringWriter;
 import java.util.HashMap;
 
+/**
+ * 模板生成demo
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
+ */
 @Component
 public class GenByTemplate {
 
@@ -64,9 +70,9 @@ public class GenByTemplate {
         logger.info("Mission completed...");
     }
 
-    private static String convertTemplate(String SourceData)throws Exception{
+    private static String convertTemplate(String sourceData)throws Exception{
         // 增加未定义的标签
-        HashMap<String,Object> appendProperties = TemplateUtil.appendProperties(SourceData, myTemplateProperties.getTagMap());
+        HashMap<String,Object> appendProperties = TemplateUtil.appendProperties(sourceData, myTemplateProperties.getTagMap());
         if(appendProperties != null && appendProperties.size() > 0) {
             myTemplateProperties.getTagMap().putAll(appendProperties);
         }
@@ -74,7 +80,7 @@ public class GenByTemplate {
         VelocityContext context = new VelocityContext(myTemplateProperties.getTagMap());
 
         StringWriter writer = new StringWriter();
-        Velocity.evaluate(context, writer, "code_gen", SourceData);
+        Velocity.evaluate(context, writer, "code_gen", sourceData);
         return writer.getBuffer().toString();
     }
 

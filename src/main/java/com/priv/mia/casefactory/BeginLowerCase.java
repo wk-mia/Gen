@@ -6,18 +6,21 @@ import java.util.HashSet;
 
 /**
  * 首字母小写
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
  */
-public class BeginLowerCase extends ICase {
+public class BeginLowerCase extends AbstractCase {
 
     @Override
     public HashMap<String, Object> getToCaseMap(String dataSource,HashMap<String,Object> alreadyMap) {
 
-        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.beginLowerCase);
+        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.BEGIN_LOWER_CASE);
         // 追加的标签
-        HashMap<String,Object> appenedTagMap = new HashMap<>();
+        HashMap<String,Object> appenedTagMap = new HashMap<>(16);
         if(appenedTagKeys.size() > 0){
             appenedTagKeys.forEach(item -> {
-                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.beginLowerCase);
+                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.BEGIN_LOWER_CASE);
                 appenedTagMap.put(item, transformAppenedTagValue(alreadyTagValue));
             });
             return appenedTagMap;

@@ -4,24 +4,26 @@ import com.priv.mia.util.CaseUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 /**
  * 全字母小写
+ *
+ * @author : wuyz
+ * @date : 2020/07/09
  */
-public class AllLowerCase extends ICase {
+public class AllLowerCase extends AbstractCase {
 
     @Override
     public HashMap<String, Object> getToCaseMap(String dataSource,HashMap<String,Object> alreadyMap) {
 
-        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.allLowerCase);
+        HashSet<String> appenedTagKeys = CaseUtil.getAppenedTagKeys(dataSource, CaseFactory.ALL_LOWER_CASE);
         // 追加的标签
-        HashMap<String,Object> appenedTagMap = new HashMap<>();
+        HashMap<String,Object> appenedTagMap = new HashMap<>(16);
         if(appenedTagKeys.size() > 0){
             appenedTagKeys.forEach(item -> {
-                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.allLowerCase);
+                Object alreadyTagValue = CaseUtil.getAlreadyTagValue(item, alreadyMap, CaseFactory.ALL_LOWER_CASE);
                 appenedTagMap.put(item, transformAppenedTagValue(alreadyTagValue));
             });
             return appenedTagMap;
